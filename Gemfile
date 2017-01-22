@@ -6,8 +6,10 @@ git_source(:github) do |repo_name|
 end
 
 gem 'coffee-rails', '~> 4.2'
+gem 'dotenv-rails', require: 'dotenv/rails-now'
 gem 'jbuilder', '~> 2.5'
 gem 'jquery-rails'
+gem 'pg'
 gem 'puma', '~> 3.0'
 gem 'rails', '~> 5.0.1'
 gem 'sass-rails', '~> 5.0'
