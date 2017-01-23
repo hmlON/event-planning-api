@@ -7,6 +7,7 @@ end
 
 gem 'coffee-rails', '~> 4.2'
 gem 'devise'
+gem 'doorkeeper'
 gem 'dotenv-rails', require: 'dotenv/rails-now'
 gem 'jbuilder', '~> 2.5'
 gem 'jquery-rails'
