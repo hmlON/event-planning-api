@@ -18,6 +18,7 @@
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 require 'devise'
 require 'factory_girl'
+require 'json_spec'
 
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate
@@ -28,6 +29,7 @@ RSpec.configure do |config|
   end
 
   config.include FactoryGirl::Syntax::Methods
+  config.include JsonSpec::Helpers
 
   # rspec-mocks config goes here. You can use an alternate test double
   # library (such as bogus or mocha) by changing the `mock_with` option here.

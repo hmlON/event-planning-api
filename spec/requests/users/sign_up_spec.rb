@@ -1,30 +1,31 @@
-describe 'API Signup' do
-  describe 'POST /api/signup' do
+describe 'Signup' do
+  describe 'POST /users' do
     context 'with valid params' do
       it 'creates User' do
         post '/users',
-             format: :json,
-             email: 'user@example.com',
-             password: '12345678'
+             user: attributes_for(:user, email: 'user@example.com'),
+             format: :json
 
         user = User.first
         expect(user.email).to eq 'user@example.com'
 
-        expect(json).to eq user_helper(user)
+        expect(response.body).to eq user.to_json
         expect(response.status).to eq 201
       end
     end
 
     context 'with invalid params' do
       it 'does not create User' do
-        post '/users  ',
+        post '/users',
              format: :json,
              email: 'invalid',
              password: ''
 
         expect(User.count).to eq 0
 
-        expect(json).to eq('errors' => { 'email' => ['is invalid'], 'password' => ["can't be blank"] })
+        json = JSON.parse(response.body)
+
+        expect(json).to eq('errors' => { 'email' => ["can't be blank"], 'password' => ["can't be blank"], "name"=>["can't be blank"] })
         expect(response.status).to eq 422
       end
     end
