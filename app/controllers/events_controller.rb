@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
   before_action :doorkeeper_authorize!
-  before_action :set_event, only: [:show, :edit, :update, :destroy]
+  before_action :set_event, only: [:show, :update, :destroy]
 
   # GET /events.json
   def index
@@ -10,14 +10,10 @@ class EventsController < ApplicationController
   # GET /events/1.json
   def show; end
 
-  # GET /events/new
-  def new
-    @event = Event.new
-  end
-
   # POST /events.json
   def create
     @event = Event.new(event_params)
+    @event.user = current_user
 
     if @event.save
       render :show, status: :created, location: @event
@@ -49,6 +45,6 @@ class EventsController < ApplicationController
   end
 
   def event_params
-    params.require(:event).permit(:user_id, :time, :place, :description)
+    params.require(:event).permit(:time, :place, :description)
   end
 end
