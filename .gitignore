@@ -1,4 +1,5 @@
 .env
+/coverage
 /.bundle
 /log/*
 /tmp/*
