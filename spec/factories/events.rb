@@ -1,8 +1,8 @@
 FactoryGirl.define do
   factory :event do
-    user nil
-    time "2017-01-23 12:48:13"
-    place "MyString"
-    description "MyText"
+    user { create(:user) }
+    time { Faker::Time.forward(365) }
+    place "#{Faker::Address.street_address}, #{Faker::Address.city}"
+    description { Faker::Hipster.paragraph }
   end
 end
