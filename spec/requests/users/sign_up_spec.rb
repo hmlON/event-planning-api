@@ -23,8 +23,6 @@ describe 'Signup' do
 
         expect(User.count).to eq 0
 
-        json = JSON.parse(response.body)
-
         expect(json).to eq('errors' => { 'email' => ["can't be blank"], 'password' => ["can't be blank"], "name"=>["can't be blank"] })
         expect(response.status).to eq 422
       end
