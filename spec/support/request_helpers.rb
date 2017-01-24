@@ -42,11 +42,7 @@ module Requests
     end
 
     def _access_token
-      @_access_token ||= create(:access_token, application: _client_application, resource_owner_id: _user.id).token
-    end
-
-    def _client_application
-      @_client_application ||= try(:client_application) || create(:client_application)
+      @_access_token ||= create(:access_token, resource_owner_id: _user.id).token
     end
   end
 end
