@@ -22,6 +22,7 @@ gem 'uglifier', '>= 1.3.0'
 group :development, :test do
   gem 'byebug', platform: :mri
   gem 'factory_girl_rails'
+  gem 'faker'
   gem 'rspec-rails'
 end
 
@@ -36,7 +37,6 @@ end
 group :test do
   gem 'capybara'
   gem 'database_cleaner'
-  gem 'faker'
   gem 'json_spec'
   gem 'launchy'
   gem 'selenium-webdriver'

@@ -7,9 +7,9 @@ describe 'Authentication', reqrest_section: 'Login and Sign up' do
         context 'without client credentials' do
           it 'returns token', reqrest_title: 'Get access token without client credentials' do
             post '/oauth/token',
-                 'grant_type' => 'password',
-                 'email' => user.email,
-                 'password' => '12345678'
+                 params: { 'grant_type' => 'password',
+                           'email' => user.email,
+                           'password' => '12345678' }
 
             expect(Doorkeeper::AccessToken.count).to eq 1
             expect(Doorkeeper::AccessToken.first.application_id).to eq nil
@@ -27,9 +27,9 @@ describe 'Authentication', reqrest_section: 'Login and Sign up' do
       context 'when credentials are not valid', :skip_reqres do
         it 'returns error' do
           post '/oauth/token',
-            'grant_type' => 'password',
-            'username' => 'invalid@example.com',
-            'password' => 'invalid'
+               params: { 'grant_type' => 'password',
+                         'username' => 'invalid@example.com',
+                         'password' => 'invalid' }
 
           expect(json).to eq(
             'error' => 'invalid_grant',

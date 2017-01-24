@@ -9,7 +9,7 @@ module Requests
 
   module AuthenticationHelpers
     def get_as_user(url, options = {})
-      get(url, options, _user_auth_headers)
+      get(url, params: options, headers: _user_auth_headers)
     end
 
     [:post, :put, :delete, :patch].each do |m|
@@ -17,7 +17,7 @@ module Requests
         opts = {} if opts.blank?
         opts = opts.to_json unless opts.values.any? { |v| v.class == Rack::Test::UploadedFile }
 
-        send(m, url, opts, _user_auth_headers)
+        send(m, url, params: opts, headers: _user_auth_headers)
       end
     end
 

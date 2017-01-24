@@ -3,8 +3,8 @@ describe 'Signup' do
     context 'with valid params' do
       it 'creates User' do
         post '/users',
-             user: attributes_for(:user, email: 'user@example.com'),
-             format: :json
+             params: { user: attributes_for(:user, email: 'user@example.com'),
+                       format: :json }
 
         user = User.first
         expect(user.email).to eq 'user@example.com'
@@ -17,9 +17,9 @@ describe 'Signup' do
     context 'with invalid params' do
       it 'does not create User' do
         post '/users',
-             format: :json,
-             email: 'invalid',
-             password: ''
+             params: { format: :json,
+                       email: 'invalid',
+                       password: '' }
 
         expect(User.count).to eq 0
 
