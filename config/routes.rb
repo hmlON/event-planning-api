@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :invites
   use_doorkeeper do
     skip_controllers :authorizations, :applications, :authorized_applications
   end

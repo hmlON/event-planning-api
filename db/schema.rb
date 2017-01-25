@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170123204158) do
+ActiveRecord::Schema.define(version: 20170125094121) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,19 @@ ActiveRecord::Schema.define(version: 20170123204158) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.index ["user_id"], name: "index_events_on_user_id", using: :btree
+  end
+
+  create_table "invites", force: :cascade do |t|
+    t.integer  "sender_id"
+    t.integer  "event_id"
+    t.integer  "recipient_id"
+    t.string   "email"
+    t.string   "token"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["event_id"], name: "index_invites_on_event_id", using: :btree
+    t.index ["recipient_id"], name: "index_invites_on_recipient_id", using: :btree
+    t.index ["sender_id"], name: "index_invites_on_sender_id", using: :btree
   end
 
   create_table "oauth_access_tokens", force: :cascade do |t|
