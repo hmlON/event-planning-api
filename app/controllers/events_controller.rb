@@ -13,7 +13,7 @@ class EventsController < ApplicationController
   # POST /events.json
   def create
     @event = Event.new(event_params)
-    @event.user = current_user
+    @event.users << current_user
 
     if @event.save
       render :show, status: :created, location: @event
