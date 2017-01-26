@@ -8,6 +8,8 @@ class Event < ApplicationRecord
 
   mount_uploaders :attachments, AttachmentUploader
 
+  scope :due, ->(due_time) { where('time <= ?', due_time) }
+
   private
 
   def time_cannot_be_in_the_past
