@@ -4,7 +4,11 @@ class EventsController < ApplicationController
 
   # GET /events.json
   def index
-    @events = Event.all
+    @events = if params[:due].present?
+                Event.due(params[:due])
+              else
+                @events = Event.all
+              end
   end
 
   # GET /events/1.json
