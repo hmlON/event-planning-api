@@ -7,7 +7,6 @@ class Invite < ApplicationRecord
 
   before_validation :generate_token, :assign_recipient
 
-
   private
 
   def generate_token

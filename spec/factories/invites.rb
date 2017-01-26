@@ -1,11 +1,13 @@
 FactoryGirl.define do
   factory :invite do
-    after(:build) { create(:user, email: 'recipient@example.com') }
-
     sender { create(:user) }
     event { create(:event) }
-    recipient nil
     email 'recipient@example.com'
+    recipient nil
     token nil
+
+    # after(:build) do
+    #   create(:user, email: 'recipient@example.com')
+    # end
   end
 end

@@ -1,10 +1,10 @@
 class InvitesController < ApplicationController
-  # before_action :doorkeeper_authorize!
+  before_action :doorkeeper_authorize!
   before_action :set_invite, only: [:show, :update, :destroy]
 
   # GET /invites.json
   def index
-    @invites = Invite.all
+    @invites = current_user.invitations + current_user.sent_invites
   end
 
   # GET /invites/1.json
@@ -13,6 +13,7 @@ class InvitesController < ApplicationController
   # POST /invites.json
   def create
     @invite = Invite.new(invite_params)
+    @invite.sender_id = current_user.id
 
     if @invite.save
       render :show, status: :created, location: @invite
@@ -35,6 +36,10 @@ class InvitesController < ApplicationController
   end
 
   def invite_params
-    params.require(:invite).permit(:sender_id, :event_id, :email, :token)
+    params.require(:invite).permit(:event_id, :email, :token)
+  end
+
+  def require_invite_ownership
+    head :forbidden unless (current_user == invite.sender) || (current_user == invite.recipient)
   end
 end
