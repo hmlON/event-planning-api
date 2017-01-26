@@ -22,5 +22,13 @@ RSpec.describe Event, type: :model do
         expect(Event.due(Time.current + 2.days)).to eq [first_event]
       end
     end
+
+    describe '#inteval' do
+      it 'returns events that will start before due time' do
+        first_event = create(:event, time: Time.current + 1.days)
+        second_event = create(:event, time: Time.current + 3.days)
+        expect(Event.interval(2.days)).to eq [first_event]
+      end
+    end
   end
 end

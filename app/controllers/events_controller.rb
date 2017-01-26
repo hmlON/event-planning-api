@@ -6,6 +6,8 @@ class EventsController < ApplicationController
   def index
     @events = if params[:due].present?
                 Event.due(params[:due])
+              elsif params[:interval].present?
+                Event.interval(parse_interval)
               else
                 @events = Event.all
               end
@@ -50,5 +52,11 @@ class EventsController < ApplicationController
 
   def event_params
     params.require(:event).permit(:time, :place, :description)
+  end
+
+  def parse_interval
+    params[:interval].slice(0, params[:interval].length-1)
+                     .to_i
+                     .days
   end
 end

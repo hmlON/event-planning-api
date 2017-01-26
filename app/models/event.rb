@@ -9,6 +9,7 @@ class Event < ApplicationRecord
   mount_uploaders :attachments, AttachmentUploader
 
   scope :due, ->(due_time) { where('time <= ?', due_time) }
+  scope :interval, ->(time) { where('time <= ?', Time.current + time) }
 
   private
 
