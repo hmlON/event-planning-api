@@ -1,6 +1,7 @@
 class InvitesController < ApplicationController
   before_action :doorkeeper_authorize!
   before_action :set_invite, only: [:show, :update, :destroy]
+  before_action :require_invite_ownership, only: [:show, :create, :destroy]
 
   # GET /invites.json
   def index
