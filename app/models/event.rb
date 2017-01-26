@@ -6,6 +6,8 @@ class Event < ApplicationRecord
   validates_length_of :place, in: (5..50)
   validate :time_cannot_be_in_the_past
 
+  mount_uploaders :attachments, AttachmentUploader
+
   private
 
   def time_cannot_be_in_the_past
