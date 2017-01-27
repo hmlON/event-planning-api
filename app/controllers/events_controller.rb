@@ -52,7 +52,7 @@ class EventsController < ApplicationController
   end
 
   def event_params
-    params.require(:event).permit(:time, :place, :description)
+    params.require(:event).permit(:time, :place, :description, :attachments)
   end
 
   def parse_interval
