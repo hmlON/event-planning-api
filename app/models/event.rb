@@ -1,6 +1,7 @@
 class Event < ApplicationRecord
   has_and_belongs_to_many :users
   has_many :invites
+  has_many :messages
 
   validates_presence_of :users, :time, :place, :description
   validates_length_of :place, in: (5..50)
