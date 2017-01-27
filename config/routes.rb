@@ -4,6 +4,7 @@ Rails.application.routes.draw do
     resources :messages
   end
   resources :invites
+  get '/feed' => 'activities#index'
   use_doorkeeper do
     skip_controllers :authorizations, :applications, :authorized_applications
   end

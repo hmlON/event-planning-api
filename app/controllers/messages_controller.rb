@@ -17,6 +17,7 @@ class MessagesController < ApplicationController
     @message.event_id = params[:event_id]
 
     if @message.save
+      @comment.create_activity :create, owner: current_user
       render :show, status: :created, location: @message
     else
       render json: @message.errors, status: :unprocessable_entity
@@ -27,6 +28,7 @@ class MessagesController < ApplicationController
   def update
     if @message.update(message_params)
       render :show, status: :ok, location: @message
+      @message.create_activity :update, owner: current_user
     else
       render json: @message.errors, status: :unprocessable_entity
     end

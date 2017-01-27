@@ -17,6 +17,7 @@ class InvitesController < ApplicationController
     @invite.sender_id = current_user.id
 
     if @invite.save
+      @invite.create_activity :create, owner: current_user
       @invite.recipient.events << @invite.event
       render :show, status: :created, location: @invite
     else
