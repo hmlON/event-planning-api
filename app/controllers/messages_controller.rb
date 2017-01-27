@@ -1,4 +1,5 @@
 class MessagesController < ApplicationController
+  before_action :doorkeeper_authorize!
   before_action :set_message, only: [:show, :edit, :update, :destroy]
 
   # GET /messages.json
@@ -13,7 +14,7 @@ class MessagesController < ApplicationController
   def create
     @message = Message.new(message_params)
     @message.user = current_user
-    @message.event = params[:event_id]
+    @message.event_id = params[:event_id]
 
     if @message.save
       render :show, status: :created, location: @message

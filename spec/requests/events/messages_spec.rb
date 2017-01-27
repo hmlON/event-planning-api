@@ -1,7 +1,7 @@
 describe 'Messages', type: :request do
-  describe 'GET /event/id/messages' do
-    let(:user) { create(:user) }
-    let(:event) { create(:event) }
+  let(:user) { create(:user) }
+  let(:event) { create(:event) }
+  describe 'GET /events/id/messages' do
     before(:each) do
       create_list(:message, 5, event: event, user: user)
       another_user = create(:user)
